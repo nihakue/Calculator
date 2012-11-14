@@ -1,6 +1,7 @@
 package west.gabriel;
-
+import west.gabriel.Expression;
 import java.awt.BorderLayout;
+
 import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -65,8 +66,6 @@ public class Calculator extends JPanel{
 		initButtons();
 		setFocusable(true);
 		setVisible(true);
-		
-		
 		
 	}
 	
