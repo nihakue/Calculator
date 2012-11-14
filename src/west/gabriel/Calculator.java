@@ -33,6 +33,8 @@ public class Calculator extends JPanel{
 	JButton[] numbersB = new JButton[10];
 	JButton[] functionsB = new JButton[10];
 	String[] functionsS = {".", "+", "-", "/", "*", "C", "(", ")", "%", "="};
+	String currentOperator;
+	Boolean justCalculated = false;
 	JTextArea display;
 	JPanel numbersP;
 	JPanel buttonGrid;
@@ -115,6 +117,10 @@ public class Calculator extends JPanel{
 	public class NumberHandler implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e){
+			if (justCalculated){
+				clearAll();
+				justCalculated=false;
+			}
 			display.append(e.getActionCommand().toString());
 			scratch = Integer.parseInt(display.getText());
 			System.out.println(scratch);
@@ -126,20 +132,54 @@ public class Calculator extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand()=="+"){
-				total += scratch;
-				scratch = 0;
-				display.setText(null);
+			System.out.println(justCalculated);
+			if (justCalculated){
+				clearAll();
+				justCalculated=false;
 			}
+			if (e.getActionCommand()=="+"){
+				currentOperator = "+";
+				total += scratch;
+				display.setText("");
+			}
+			if (e.getActionCommand()=="-"){
+				currentOperator = "-";
+				total -= scratch;
+				display.setText("");
+			}
+			if (e.getActionCommand()=="*"){
+				currentOperator = "*";
+				total *= scratch;
+				display.setText("");
+			}
+			
 			if(e.getActionCommand() == "="){
+				if (currentOperator=="+"){
+					total += scratch;
+				}
+				if (currentOperator=="-"){
+					total -= scratch;
+				}
+				if (currentOperator=="*"){
+					total *= scratch;
+				}
 				display.setText(String.valueOf(total));
+				justCalculated = true;
+				System.out.println("equals");
 			}
 			if (e.getActionCommand() == "C"){
 				total = 0;
 				scratch = 0;
-				display.setText(null);
+				display.setText("");
 			}
 		}
+
+	}
+	
+	private void clearAll() {
+		total = 0;
+		scratch = 0;
+		display.setText("");
 	}
 
 	
@@ -155,7 +195,7 @@ public class Calculator extends JPanel{
 		test.setVisible(true);
 		
 	}
-	//Comment
+
 	public class Keyculator extends KeyAdapter{
 		@Override
 		public void keyPressed(KeyEvent e){
