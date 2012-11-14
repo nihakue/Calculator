@@ -34,7 +34,9 @@ public class Calculator extends JPanel{
 	JButton[] functionsB = new JButton[10];
 	String[] functionsS = {".", "+", "-", "/", "*", "C", "(", ")", "%", "="};
 	String currentOperator;
-	Boolean justCalculated = false;
+	boolean justCalculated = false;
+	boolean firstNum = true;
+	char operator;
 	JTextArea display;
 	JPanel numbersP;
 	JPanel buttonGrid;
@@ -132,7 +134,7 @@ public class Calculator extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(justCalculated);
+			System.out.println(e.getActionCommand());
 			if (justCalculated){
 				clearAll();
 				justCalculated=false;
