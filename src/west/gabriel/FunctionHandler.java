@@ -1,2 +1,0 @@
-package west.gabriel;
-

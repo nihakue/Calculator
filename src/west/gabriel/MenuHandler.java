@@ -10,6 +10,12 @@ public class MenuHandler implements ActionListener {
 		if (e.getActionCommand()=="Exit"){
 			System.exit(0);
 		}
+		if (e.getActionCommand() == "Show History");{
+			System.out.println("show history");
+			Calculator.historyFrame.setVisible(true);
+			Calculator.historyFrame.setFocusableWindowState(false);
+			
+		}
 
 	}
 
